@@ -27,16 +27,14 @@ const { siteRepo, title, author, socialLinks } = SITE_METADATA;
       <Link href="/">{title}</Link>
     </div>
     <div class="mb-8 text-sm text-gray-500 dark:text-gray-400">
+      <Link href="https://astro.build/">
+        {`Built with `}
+        <span class="underline">Astro</span>
+        {` • `}
+      </Link>
       <Link href={siteRepo}>
-        {title}
-        {` is open source. `}
-        {` View `}
-        <span class="underline">the source</span>
-        {` code on `}
-        <span class="underline">GitHub</span>
-        {` and `}
-        <span class="underline">give it a star</span>
-        {` if you like it.`}
+        {`Source on `}
+        <span class="underline">Github</span>
       </Link>
     </div>
   </div>
