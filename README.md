@@ -6,4 +6,7 @@ This site started with the tailwind astro started blog and has diverged in many 
 - [ ] Actions for notebooks and obsidian markdown to automatically be pulled into repo
 - [ ] Add content config for obsidian and notebooks separatey?
 - [ ] Add reading time
+- [ ] Add rehype autolink headings
+- [ ] remark gfm for footnotes
+- [ ] rehype citation for bib with citations
 - [x] change from prism to shikiji

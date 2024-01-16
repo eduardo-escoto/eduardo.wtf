@@ -1,9 +1,9 @@
 ---
-import { type Page, getCollection } from 'astro:content'
+import { getCollection, type Page } from 'astro:content'
 // import ListLayout from "@/layouts/ListLayout.astro";
-import { ITEMS_PER_PAGE } from '@/consts'
-import { sortBlogPosts, excludeDrafts } from '@/functions'
 import ListWithTagsLayout from '../../layouts/ListWithTagsLayout.astro'
+import { ITEMS_PER_PAGE } from '@/consts'
+import { excludeDrafts, sortBlogPosts } from '@/functions'
 
 interface Props {
   page: Page

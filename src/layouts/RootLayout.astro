@@ -2,8 +2,8 @@
 import type { CollectionEntry } from 'astro:content'
 
 import BaseHead from '../components/BaseHead.astro'
-import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
 import SectionContainer from '../components/SectionContainer.astro'
 
 import { SITE_METADATA } from '../consts'
@@ -18,7 +18,7 @@ const { title, description } = Astro.props
 
 <html lang={SITE_METADATA.language} class="scroll-smooth">
   <BaseHead title={title} description={description} />
-  <body class="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
+  <body class="text-black bg-white antialiased dark:bg-gray-950 dark:text-white">
     <!--TODO: Add Google Analytics-->
     <!--<Analytics analyticsConfig={SITE_METADATA.analytics as AnalyticsConfig} />-->
     <SectionContainer>

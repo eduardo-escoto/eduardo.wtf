@@ -1,7 +1,12 @@
 .eslintrc.cjs
 global.css
 
+dist
 node_modules
+.astro
+
+env.d.ts
+
 pnpm-lock.yaml
 package.json
 

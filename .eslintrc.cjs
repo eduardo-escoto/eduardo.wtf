@@ -12,7 +12,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
     'plugin:astro/recommended',
   ],
@@ -36,15 +35,6 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
-      },
-    ],
-    'sort-imports': 1,
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',

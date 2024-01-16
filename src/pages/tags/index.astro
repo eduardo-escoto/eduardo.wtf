@@ -1,9 +1,9 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content'
 
-import RootLayout from '@/layouts/RootLayout.astro'
-import Tag from '@/components/Tag.astro'
 import Link from '@/components/Link.astro'
+import Tag from '@/components/Tag.astro'
+import RootLayout from '@/layouts/RootLayout.astro'
 
 const tags = await getCollection('tags')
 const posts = await getCollection('blog')
