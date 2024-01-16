@@ -4,14 +4,15 @@ const authors = defineCollection({
     type: 'content',
     schema: z.object({
         name: z.string(),
-        avatar: z.string().optional(),
-        occupation: z.string().optional(),
-        company: z.string().optional(),
+        avatar: z.string(),
+        occupation: z.string(),
+        company: z.string(),
+        socialLinks: z.object({
         email: z.string().email(),
         twitter: z.string().url().optional(),
         linkedin: z.string().url().optional(),
         github: z.string().url().optional(),
-        layout: z.string().url().optional(),
+    }),
     }),
 });
 
