@@ -1,11 +1,14 @@
 ---
 import { getEntry } from 'astro:content'
 import AuthorLayout from '@/layouts/AuthorLayout.astro'
+import RootLayout from '@/layouts/RootLayout.astro'
 
 const author = await getEntry('authors', 'default')
 const { Content } = await author.render()
 ---
 
-<AuthorLayout content={author}>
-  <Content />
-</AuthorLayout>
+<RootLayout title={Content.name} description="about">
+  <AuthorLayout content={author}>
+    <Content />
+  </AuthorLayout>
+</RootLayout>

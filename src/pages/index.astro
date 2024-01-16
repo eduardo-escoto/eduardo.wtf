@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection, getEntry } from 'astro:content'
 
 import { SITE_METADATA, ITEMS_PER_PAGE } from '@/consts'
 import RootLayout from '@/layouts/RootLayout.astro'
@@ -7,11 +7,17 @@ import Link from '@/components/Link.astro'
 import FormattedDate from '@/components/FormattedDate.astro'
 import Tag from '@/components/Tag.astro'
 import { excludeDrafts, sortBlogPosts } from '@/functions'
+import AuthorLayout from '@/layouts/AuthorLayout.astro'
 
+const author = await getEntry('authors', 'default')
 const posts = await getCollection('blog', excludeDrafts).then(sortBlogPosts)
+const { Content } = await author.render()
 ---
 
 <RootLayout title={SITE_METADATA.title} description={SITE_METADATA.description}>
+  <AuthorLayout content={author}>
+    <Content />
+  </AuthorLayout>
   <div class="divide-y divide-gray-200 dark:divide-gray-700">
     <div class="space-y-2 pb-8 pt-6 md:space-y-5">
       <h1
