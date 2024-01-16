@@ -5,32 +5,31 @@ summary: Numerical Analysis code and proofs of numerous polynomial interpolation
 tags: ['math']
 title: An exploration of Polynomial Interpolation
 ---
+
 # Interpolating Polynomials
 
-___
-
+---
 
 ```python
 ! pip install numpy matplotlib --quiet
 ```
-
 
 ```python
 import numpy as np
 from matplotlib import pyplot as plt
 ```
 
-___
+---
 
 ### The Lagrangian Form of $P_2$
 
 Given the data points in the table below, we can use the lagrangian form to get a second-degree polynomial which we can use to estimate our unknown function, $f$.
 
-| $x_{j}$ | $f(x_{j})$  |
-|---------|-------------|
-|   $0$  | $1$    |
-|   $1$  | $1$    |
-|   $3$  | $-5$ |
+| $x_{j}$ | $f(x_{j})$ |
+| ------- | ---------- |
+| $0$     | $1$        |
+| $1$     | $1$        |
+| $3$     | $-5$       |
 
 The Lagrangian form of $P_{2}$ is written as
 $$p_{2}(x) = l_{0}(x)f(x_{0}) + l_{1}(x)f(x_{1}) + l_{2}(x)f(x_{2})$$
@@ -47,7 +46,6 @@ $$f(2)\approx p_{2}(2) = -(2)^2 + 2 +1 = -4 + 3 = -1 \implies f(2)\approx -1$$
 
 Which we can visualize in the graph below for our given data, and test point at $x=2$.
 
-
 ```python
 x = np.linspace(-5,6, 1000)
 points = [(0,1),(1,1),(3, -5)]
@@ -63,15 +61,12 @@ ax.legend()
 ax.set_title("$P_{2}$, Given Data, and Test Point");
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_11_0.png)
-    
 
-
-___
+---
 
 ### Lebesgue Interpolation
+
 We can prove that
 
 $$
@@ -90,9 +85,8 @@ $$
 
 Of which we can write some python to evaluate the Lebesgue function (2) associated to a given set of pairwise distinct nodes $x_{0},\dots , x_{n}$.
 
-
 ```python
-def equidist_x(n): 
+def equidist_x(n):
     return np.array([-1 + k*(2/n) for k in range(n+1)])
 def cheby_x(n):
     return np.array([np.cos((k*np.pi)/n) for k in range(n+1)])
@@ -116,10 +110,10 @@ def LebesgueFunction(X, vectorized = True):
         return LebFunc
 
 def plotL_n(x_j, L_n, ax = None):
-    
-    if ax is None: 
+
+    if ax is None:
         fig, ax = plt.subplots(figsize = (6,4))
-        
+
     n_e = 1000
     n = str(len(x_j)-1)
     x_points = equidist_x(n_e)
@@ -127,7 +121,7 @@ def plotL_n(x_j, L_n, ax = None):
     max_Lambda = np.max(y_points)
     Title = "Max $\Lambda_{" + str(n) + "}=" + str(max_Lambda) + "$"
     ax.plot(x_points, y_points, label = "$L_{"+str(n) + "}$")
-    ax.hlines(y = max_Lambda, xmin = -1,xmax = 1, 
+    ax.hlines(y = max_Lambda, xmin = -1,xmax = 1,
               linestyle = "--", alpha = .5, label="$|| L_{"+str(n) + "}||_{\infty}$")
     ax.legend()
     ax.set_title(Title)
@@ -135,7 +129,6 @@ def plotL_n(x_j, L_n, ax = None):
 ```
 
 If we consider the equidistributed points $x_{j} = -1 + j(2/n)$ for $j = 0,\dots,n$. We can plot $L_{n}(x)$ (evaluate $L_{n}(x)$ at a large number of points $\bar{x}_{k}$ to have a good plotting resolution, e.g. $\bar{x}_{k} = -1 + k(2/n_{e}), k = 0, \dots, n_{e}$ with $n_{e} = 1000$) for $n = 4, 10, \text{ and } 20$. And then estimate $\Lambda_{n}$ for these three values of $n$.
-
 
 ```python
 N = [4, 10,20]
@@ -154,18 +147,13 @@ for i, n in enumerate(N):
     The max for n = 10 is 29.898141093562177
     The max for n = 20 is 10979.243923985841
 
-
-
-    
 ![png](/static/images/interpolating_polynomials/output_17_1.png)
-    
-
 
 Where we see that for the equidistant nodes above, that the Lebesgue constant is being defined by the behavior at the edges of our range.
 
 #### Lebesgue Interpolation with Chebysheve Nodes
-If we instead repeat the above for the Chebyshev nodes $x_{j} = \cos\left(\frac{j\pi}{n}\right), j = 0,\dots, n$. We can see different behavior of $L_{n}(x)$ and $\Lambda_{n}$ with those corresponding to the equidistributed points.
 
+If we instead repeat the above for the Chebyshev nodes $x_{j} = \cos\left(\frac{j\pi}{n}\right), j = 0,\dots, n$. We can see different behavior of $L_{n}(x)$ and $\Lambda_{n}$ with those corresponding to the equidistributed points.
 
 ```python
 N = [4,10,20]
@@ -179,20 +167,15 @@ for i, n in enumerate(N):
     plotL_n(x_j, L_n, ax[i])
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_20_0.png)
-    
-
 
 As can be seen above, the Chebyshev nodes seem to obtain their max close to zero as n increases, however, with the equidistant nodes, the max seems to be acheived closer to the bounds of the interval, namely near $-1$ or $1$. Additionally $\Lambda_{n}$ tends to grow much faster with the equidistant nodes, where with the Chebyshev nodes, it grows much slower.
 
-___
+---
 
 ### Interpolating Arbitrarily distributed Nodes
 
 We can use the Barycentric Formula for evaluating the interpolating polynomial for abritrarily distributed nodes $x_{0}, \dots,x_{n}$
-
 
 ```python
 def BaryWeights(X):
@@ -206,7 +189,7 @@ def BaryFormula(X, F_x, l=None , vectorized = True):
     n = len(X)
     N = len(x)
     l = BaryWeights(X) if l is None else l
-    
+
     def BaryFunc(x):
         p = 0
         # Compute quotient of weighted sums
@@ -218,15 +201,14 @@ def BaryFormula(X, F_x, l=None , vectorized = True):
             mu = l / z
             p = np.sum(mu * F_x) / np.sum(mu)
         return p
-    
+
     if vectorized:
         return lambda points: np.array([BaryFunc(x) for x in points], dtype='object')
     else:
-        return BaryFunc   
+        return BaryFunc
 ```
 
 Here we test it with just a regular degree 3 polynomial!
-
 
 ```python
 nodes = np.linspace(-1, 1, 5)
@@ -242,25 +224,20 @@ ax.plot(points, points**3, '-', label='Function')
 ax.legend();
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_27_0.png)
-    
-
 
 Consider the following table of data
 
-| $x_{j}$ | $f(x_{j})$  |
-|---------|-------------|
-|   $0.00$  | $0.0000$    |
-|   $0.25$  | $0.7070$    |
-|   $0.52$  | $1.0000$    |
-|   $0.74$  | $0.7071$    |
-|   $1.28$  | $-0.7074$    |
-|   $1.50$  | $-1.0000$    |
+| $x_{j}$ | $f(x_{j})$ |
+| ------- | ---------- |
+| $0.00$  | $0.0000$   |
+| $0.25$  | $0.7070$   |
+| $0.52$  | $1.0000$   |
+| $0.74$  | $0.7071$   |
+| $1.28$  | $-0.7074$  |
+| $1.50$  | $-1.0000$  |
 
 Here we show what the function looks like from our interpolation!
-
 
 ```python
 nodes = np.array([0,.25,.52,.74,1.28,1.50])
@@ -276,30 +253,21 @@ ax.plot(points, p(points), '-', label='Interpolation')
 ax.legend();
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_30_0.png)
-    
-
 
 And the $P_{5}$ interpolation of $f(2)$ is
-
 
 ```python
 (BaryFormula(nodes, data, vectorized = False))(2)
 ```
 
-
-
-
     -2.343829608172828
 
-
-
-___
+---
 
 ### The Runge Example
-Let 
+
+Let
 
 $$
 \begin{equation}
@@ -307,19 +275,22 @@ f(x) = \frac{1}{1+25x^{2}} \text{ with } x\in [-1,1]
 \end{equation}
 $$
 
-And lets interpolate with both: 
+And lets interpolate with both:
 
 (a) The equidistributed nodes $x_{j} = -1 + j(2/n), j = 0,\dots, n$ for $n = 4,8,\text{ and } 12$.
 
 (b) The Chebyshev nodes $x_{j} = \cos\left(\frac{j\pi}{n}\right), j = 0, \dots, n$ for $n = 4,8,12,\text{ and } 100$.
 
 Where we use the barycentric weights for the equidistributed nodes
+
 $$
 \begin{equation}
 \lambda_{j} = {\left(-1\right)}^{j} {n\choose j} \text{ for } j = 0,\dots, n
 \end{equation}
 $$
+
 and for the Chebyshev nodes we can use
+
 $$
 \begin{equation}
 \lambda_{j} = \begin{cases}
@@ -329,13 +300,12 @@ $$
 \end{equation}
 $$
 
-
 ```python
 def plotB_n(x_j, B_n, f_x, ax = None):
-    
-    if ax is None: 
+
+    if ax is None:
         fig, ax = plt.subplots(figsize = (6,4))
-        
+
     n_e = 1000
     n = str(len(x_j)-1)
     x_points = equidist_x(n_e)
@@ -349,11 +319,9 @@ def plotB_n(x_j, B_n, f_x, ax = None):
     return ax
 ```
 
-
 ```python
 f_x = lambda x: 1/(1+25*(x**2))
 ```
-
 
 ```python
 def EquidistantBaryWeights(X):
@@ -361,7 +329,6 @@ def EquidistantBaryWeights(X):
     n = len(X)
     return np.array([((-1)**j)*comb(n-1, j) for j in range(n)])
 ```
-
 
 ```python
 N = [4,8,12]
@@ -377,16 +344,11 @@ for i, n in enumerate(N):
     plotB_n(x_j, B_n, f_x, ax[i])
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_38_0.png)
-    
-
 
 #### Chebyshev Nodes
 
 The Chebyshev nodes $x_{j} = \cos\left(\frac{j\pi}{n}\right), j = 0, \dots, n$ for $n = 4,8,12,\text{ and } 100$.
-
 
 ```python
 def ChebyBaryWeights(X):
@@ -396,7 +358,6 @@ def ChebyBaryWeights(X):
     l[-1] = l[-1]/2
     return l
 ```
-
 
 ```python
 N = [4,8,12, 100]
@@ -412,15 +373,11 @@ for i, n in enumerate(N):
     plotB_n(x_j, B_n, f_x, ax[i])
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_41_0.png)
-    
-
 
 #### Error analysis
-Plotting the error $e_{n} = f-p_{n}$ for (a) and (b)
 
+Plotting the error $e_{n} = f-p_{n}$ for (a) and (b)
 
 ```python
 e_n = lambda x, f_x, B_n: f_x(x)-B_n(x)
@@ -443,14 +400,9 @@ for i, n in enumerate(N):
     ax[i].legend()
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_43_0.png)
-    
-
 
 In the above graphs you see that the error is very small around $x=0$ which is what we would expect as seen in the graph above, the equidistant nodes tend to be very close to the function using Barycentric interpolation.
-
 
 ```python
 e_n = lambda x, f_x, B_n: f_x(x)-B_n(x)
@@ -473,17 +425,13 @@ for i, n in enumerate(N):
     ax[i].legend()
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_45_0.png)
-    
-
 
 In the above graphs you see that the error is very small around $x=-1,0,1$ which is what we would expect as seen in the graphs above, the chebyshev nodes tend to be very close to the function using Barycentric interpolation on the edges and the origin, however they tend to be farther in between the origin and the edges.
 
 #### Another Test
-For $f(x) = e^{x^{2}}$ for $x\in \left[-1, 1\right]$ 
 
+For $f(x) = e^{x^{2}}$ for $x\in \left[-1, 1\right]$
 
 ```python
 f_x = lambda x: (np.e)**(x**2)
@@ -500,14 +448,9 @@ for i, n in enumerate(N):
     plotB_n(x_j, B_n, f_x, ax[i])
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_48_0.png)
-    
-
 
 Here we can see that the equidistant nodes tend to be a very good approximation for the function. Even at $4$ nodes, the function seems to be very close, and even the error looks to be very small. As $n$ increases, we see it match the function pretty much perfectly. Below I will also plot the error which will reveal that the error is very small on this interval.
-
 
 ```python
 e_n = lambda x, f_x, B_n: f_x(x)-B_n(x)
@@ -530,10 +473,6 @@ for i, n in enumerate(N):
     ax[i].legend()
 ```
 
-
-    
 ![png](/static/images/interpolating_polynomials/output_50_0.png)
-    
-
 
 As seen above, the max error at $12$ nodes is about $0.000010$, that is very good for the low computation cost it took.

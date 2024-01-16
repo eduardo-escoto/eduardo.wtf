@@ -1,4 +1,4 @@
-import type {CollectionEntry} from "astro:content";
+import type { CollectionEntry } from 'astro:content'
 
 /**
  * Filter blog posts by published date and order them.
@@ -11,9 +11,9 @@ import type {CollectionEntry} from "astro:content";
  * @returns Collection of blog posts sorted by date
  */
 export const sortBlogPosts = (posts: CollectionEntry<'blog'>[]): CollectionEntry<'blog'>[] => {
-    return posts.sort((a, b) => {
-        return new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-    })
+  return posts.sort((a, b) => {
+    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  })
 }
 
 /**
@@ -22,6 +22,6 @@ export const sortBlogPosts = (posts: CollectionEntry<'blog'>[]): CollectionEntry
  * @param post Blog post
  * @returns True if the post is not a draft
  */
-export const excludeDrafts = ({data}: CollectionEntry<'blog'>): boolean => {
-    return import.meta.env.PROD ? !data.draft : true;
+export const excludeDrafts = ({ data }: CollectionEntry<'blog'>): boolean => {
+  return import.meta.env.PROD ? !data.draft : true
 }

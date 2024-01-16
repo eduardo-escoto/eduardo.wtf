@@ -1,4 +1,5 @@
-**/*.mdx
-**/*.md
-**/*.html
 **/*.svg
+/dist/**/*
+/node_modules/**/*
+.astro/**/*
+package-lock.json
