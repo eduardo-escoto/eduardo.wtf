@@ -8,8 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prettier:format": "prettier --write \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\"",
-    "prettier:check:ci": "prettier --check \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\"",
+    "prettier:format": "prettier --write \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\" --plugin=prettier-plugin-astro",
+    "prettier:check:ci": "prettier --check \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\" --plugin=prettier-plugin-astro",
     "prepare": "husky install"
   },
   "dependencies": {
