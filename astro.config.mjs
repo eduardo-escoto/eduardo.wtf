@@ -4,6 +4,8 @@ import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
+import rehypeShikiji from 'rehype-shikiji'
+import { transformerNotationDiff } from 'shikiji-transformers'
 
 import { SITE_METADATA } from './src/consts.ts'
 
@@ -13,7 +15,21 @@ export default defineConfig({
   site: SITE_METADATA.siteUrl,
   integrations: [mdx(), sitemap(), tailwind()],
   markdown: {
-    rehypePlugins: [rehypeKatex],
+    syntaxHighlight: false,
+    rehypePlugins: [
+      rehypeKatex,
+      [
+        rehypeShikiji,
+        {
+          themes: {
+            light: 'catppuccin-latte',
+            dark: 'catppuccin-mocha',
+          },
+          transformers: [transformerNotationDiff()],
+          wrap: true,
+        },
+      ],
+    ],
     remarkPlugins: [remarkMath],
   },
 })

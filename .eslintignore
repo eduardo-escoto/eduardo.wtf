@@ -1,5 +1,7 @@
-node_modules
 .eslintrc.cjs
+global.css
+
+node_modules
 pnpm-lock.yaml
 package.json
 
