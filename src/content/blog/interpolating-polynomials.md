@@ -2,7 +2,8 @@
 date: '2023-11-21'
 draft: false
 summary: Numerical Analysis code and proofs of numerous polynomial interpolation techniques.
-tags: ['math']
+tags:
+  - math
 title: An exploration of Polynomial Interpolation
 ---
 
@@ -61,7 +62,7 @@ ax.legend()
 ax.set_title("$P_{2}$, Given Data, and Test Point");
 ```
 
-![png](/static/images/interpolating_polynomials/output_11_0.png)
+![png](/static/images/interpolating-polynomials/output_11_0.png)
 
 ---
 
@@ -147,7 +148,7 @@ for i, n in enumerate(N):
     The max for n = 10 is 29.898141093562177
     The max for n = 20 is 10979.243923985841
 
-![png](/static/images/interpolating_polynomials/output_17_1.png)
+![png](/static/images/interpolating-polynomials/output_17_1.png)
 
 Where we see that for the equidistant nodes above, that the Lebesgue constant is being defined by the behavior at the edges of our range.
 
@@ -167,7 +168,7 @@ for i, n in enumerate(N):
     plotL_n(x_j, L_n, ax[i])
 ```
 
-![png](/static/images/interpolating_polynomials/output_20_0.png)
+![png](/static/images/interpolating-polynomials/output_20_0.png)
 
 As can be seen above, the Chebyshev nodes seem to obtain their max close to zero as n increases, however, with the equidistant nodes, the max seems to be acheived closer to the bounds of the interval, namely near $-1$ or $1$. Additionally $\Lambda_{n}$ tends to grow much faster with the equidistant nodes, where with the Chebyshev nodes, it grows much slower.
 
@@ -224,7 +225,7 @@ ax.plot(points, points**3, '-', label='Function')
 ax.legend();
 ```
 
-![png](/static/images/interpolating_polynomials/output_27_0.png)
+![png](/static/images/interpolating-polynomials/output_27_0.png)
 
 Consider the following table of data
 
@@ -253,7 +254,7 @@ ax.plot(points, p(points), '-', label='Interpolation')
 ax.legend();
 ```
 
-![png](/static/images/interpolating_polynomials/output_30_0.png)
+![png](/static/images/interpolating-polynomials/output_30_0.png)
 
 And the $P_{5}$ interpolation of $f(2)$ is
 
@@ -344,7 +345,7 @@ for i, n in enumerate(N):
     plotB_n(x_j, B_n, f_x, ax[i])
 ```
 
-![png](/static/images/interpolating_polynomials/output_38_0.png)
+![png](/static/images/interpolating-polynomials/output_38_0.png)
 
 #### Chebyshev Nodes
 
@@ -373,7 +374,7 @@ for i, n in enumerate(N):
     plotB_n(x_j, B_n, f_x, ax[i])
 ```
 
-![png](/static/images/interpolating_polynomials/output_41_0.png)
+![png](/static/images/interpolating-polynomials/output_41_0.png)
 
 #### Error analysis
 
@@ -400,7 +401,7 @@ for i, n in enumerate(N):
     ax[i].legend()
 ```
 
-![png](/static/images/interpolating_polynomials/output_43_0.png)
+![png](/static/images/interpolating-polynomials/output_43_0.png)
 
 In the above graphs you see that the error is very small around $x=0$ which is what we would expect as seen in the graph above, the equidistant nodes tend to be very close to the function using Barycentric interpolation.
 
@@ -425,7 +426,7 @@ for i, n in enumerate(N):
     ax[i].legend()
 ```
 
-![png](/static/images/interpolating_polynomials/output_45_0.png)
+![png](/static/images/interpolating-polynomials/output_45_0.png)
 
 In the above graphs you see that the error is very small around $x=-1,0,1$ which is what we would expect as seen in the graphs above, the chebyshev nodes tend to be very close to the function using Barycentric interpolation on the edges and the origin, however they tend to be farther in between the origin and the edges.
 
@@ -448,7 +449,7 @@ for i, n in enumerate(N):
     plotB_n(x_j, B_n, f_x, ax[i])
 ```
 
-![png](/static/images/interpolating_polynomials/output_48_0.png)
+![png](/static/images/interpolating-polynomials/output_48_0.png)
 
 Here we can see that the equidistant nodes tend to be a very good approximation for the function. Even at $4$ nodes, the function seems to be very close, and even the error looks to be very small. As $n$ increases, we see it match the function pretty much perfectly. Below I will also plot the error which will reveal that the error is very small on this interval.
 
@@ -473,6 +474,6 @@ for i, n in enumerate(N):
     ax[i].legend()
 ```
 
-![png](/static/images/interpolating_polynomials/output_50_0.png)
+![png](/static/images/interpolating-polynomials/output_50_0.png)
 
 As seen above, the max error at $12$ nodes is about $0.000010$, that is very good for the low computation cost it took.
