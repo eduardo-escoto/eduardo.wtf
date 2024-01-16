@@ -2,3 +2,8 @@ node_modules
 .eslintrc.cjs
 pnpm-lock.yaml
 package.json
+
+*.md
+*.mdx
+*.svg
+*.yaml
