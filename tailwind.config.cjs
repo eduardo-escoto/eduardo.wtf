@@ -1,18 +1,11 @@
-const { fontFamily } = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
   theme: {
-    colors: {
-      white: '#ffffff',
-      pre_grey_text: '#4C4F69',
-      pre_grey_dark_text: '#CDD6F4',
-      pre_bg_grey: '#eff1f5',
-      pre_bg_dark_grey: '#1e1e2e',
-    },
     extend: {
       lineHeight: {
         11: '2.75rem',
@@ -26,6 +19,11 @@ module.exports = {
       colors: {
         primary: colors.pink,
         gray: colors.gray,
+        white: '#ffffff',
+        pre_grey_text: '#4C4F69',
+        pre_grey_dark_text: '#CDD6F4',
+        pre_bg_grey: '#eff1f5',
+        pre_bg_dark_grey: '#1e1e2e',
       },
       typography: ({ theme }) => ({
         DEFAULT: {
