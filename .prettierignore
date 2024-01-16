@@ -1,5 +1,8 @@
-**/*.svg
+.astro/**/*
+
 /dist/**/*
 /node_modules/**/*
-.astro/**/*
+
+**/*.svg
+
 package-lock.json
