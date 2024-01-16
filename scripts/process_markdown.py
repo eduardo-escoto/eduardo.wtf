@@ -29,6 +29,9 @@ if __name__ == "__main__":
             if "date" not in post.metadata.keys():
                 post.metadata["date"] = datetime.today().strftime("%Y-%m-%d")
 
+            if "summary" not in post.metadata.keys():
+                post.metadata["summary"] = post.content[:100] + "..."
+
             with open(output_path, "wb") as outfile:
                 frontmatter.dump(post, outfile)
 
