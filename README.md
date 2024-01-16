@@ -25,7 +25,6 @@ Feature request or Facing issue? Check the [discussion page](https://github.com/
 - Astro with Typescript
 - Astro MDX support
 - Easy styling customization with [Tailwind 3.3](https://tailwindcss.com/blog/tailwindcss-v3-3) and primary color attribute
-- ~~Perfect lighthouse score~~ - Still have to make some improvements
 - Mobile-friendly view
 - Light and dark theme
 - ~~Font optimization~~ - Not yet implemented
