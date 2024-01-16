@@ -21,7 +21,7 @@ export const SITE_METADATA = {
   socialLinks: {
     email: 'me@eduardo.wtf',
     github: 'https://github.com/eduardo-escoto',
-    linkedin: 'https://www.linkedin.com/eduardo-escoto',
+    linkedin: 'https://www.linkedin.com/in/eduardo-escoto',
   },
 
   // These are not supported yet
