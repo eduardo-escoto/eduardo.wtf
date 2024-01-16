@@ -40,7 +40,7 @@ const tags = defineCollection({
     type: 'content',
     schema: z.object({
         name: z.string(),
-        description: z.string().optional(),
+        description: z.string(),
         // TODO: Add support for images and layout
         // image: z.string().optional(),
         // layout: z.string().optional(),
