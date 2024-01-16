@@ -6,6 +6,13 @@ module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
   theme: {
+    colors: {
+      white: '#ffffff',
+      pre_grey_text: '#4C4F69',
+      pre_grey_dark_text: '#CDD6F4',
+      pre_bg_grey: '#eff1f5',
+      pre_bg_dark_grey: '#1e1e2e',
+    },
     extend: {
       lineHeight: {
         11: '2.75rem',
@@ -40,6 +47,10 @@ module.exports = {
             code: {
               color: theme('colors.indigo.500'),
             },
+            pre: {
+              color: theme('colors.pre_grey_text'),
+              backgroundColor: theme('colors.pre_bg_grey'),
+            },
           },
         },
         invert: {
@@ -53,6 +64,13 @@ module.exports = {
             },
             'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.100'),
+            },
+            img: {
+              backgroundColor: theme('colors.white'),
+            },
+            pre: {
+              color: theme('colors.pre_grey_dark_text'),
+              backgroundColor: theme('colors.pre_bg_dark_grey'),
             },
           },
         },

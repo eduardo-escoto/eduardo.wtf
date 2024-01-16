@@ -8,8 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prettier:format": "prettier --write \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\"",
-    "prettier:check:ci": "prettier --check \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\"",
+    "prettier:format": "prettier --write \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\" --plugin=prettier-plugin-astro",
+    "prettier:check:ci": "prettier --check \"**/*.{ts,tsx,js,md,mdx,css,yaml,astro,cjs,mjs,json}\" --plugin=prettier-plugin-astro",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -40,6 +40,9 @@
     "prettier": "^3.2.2",
     "prettier-plugin-astro": "^0.12.3",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "rehype-shikiji": "0.10.0-beta.3",
+    "shikiji": "0.10.0-beta.3",
+    "shikiji-transformers": "0.10.0-beta.3",
     "tailwindcss": "^3.4.1"
   }
 }
