@@ -14,3 +14,5 @@ This site started with the tailwind astro started blog and has diverged in many 
 - [ ] Count only draft = false posts in tag counts
 - [ ] move notebooks to notebooks subdirectory (?)
 - [ ] Serve notebooks as downloads or have link to notebook file on github
+- [ ] When resume is built, add action to update the latest
+- [ ] add resume link
