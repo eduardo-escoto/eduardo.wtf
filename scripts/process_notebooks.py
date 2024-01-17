@@ -42,7 +42,7 @@ template_creator = (
 nb_folder_path = Path("./.process_data/notebooks")
 
 output_markdown_path = Path("./src/content/blog")
-output_images_path = Path("./public/static/images")
+output_images_path = Path("./src/content/blog/images")
 output_files_path = Path("./public/static/notebooks")
 
 
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     for notebook_path in nb_folder_path.glob("*.ipynb"):
         output_folder = slugify(notebook_path.stem)
 
-        out_j2 = template_creator(str(Path("/static/images") / output_folder) + "/")
+        out_j2 = template_creator("./" + str(Path("images") / output_folder) + "/")
         dl = DictLoader({"img": out_j2})
 
         md_exporter = MarkdownExporter(extra_loaders=[dl], template_file="img")
