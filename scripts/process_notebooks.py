@@ -89,7 +89,7 @@ if __name__ == "__main__":
             ) as output_file:
                 output_file.write(body)
 
-        os.makedirs(output_files_path, exist_ok=True)
-        os.rename(notebook_path, str(output_files_path / output_folder) + ".ipynb")
+        # os.makedirs(output_files_path, exist_ok=True)
+        # os.rename(notebook_path, str(output_files_path / output_folder) + ".ipynb")
 
 os.system("rm -rf ./.process_data/notebooks")
