@@ -21,3 +21,6 @@ This site started with the tailwind astro started blog and has diverged in many 
 - [ ] Add defaults for notebooks
 - [ ] Think about using a monorepo
 - [ ] Chatgpt for summarization and tag description generation
+- [x] Auto link headings that render correctly
+- [x] Table of content generation
+- [ ] TOC Styling
