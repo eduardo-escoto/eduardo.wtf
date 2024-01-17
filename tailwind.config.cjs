@@ -68,6 +68,14 @@ module.exports = {
               },
               code: { color: theme('colors.primary.400') },
             },
+            '.header-link': {
+              textDecoration: 'none',
+              color: theme('colors.gray.100'),
+              transition: '0.2s',
+              '&:hover': {
+                color: theme('colors.primary.400'),
+              },
+            },
             'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.100'),
             },
