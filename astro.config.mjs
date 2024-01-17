@@ -28,7 +28,13 @@ export default defineConfig({
     syntaxHighlight: false,
     rehypePlugins: [
       rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'wrap',
+          properties: { class: 'header-link' },
+        },
+      ],
       rehypeKatex,
       [
         rehypeShikiji,

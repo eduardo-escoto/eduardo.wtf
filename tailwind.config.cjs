@@ -35,6 +35,14 @@ module.exports = {
               },
               code: { color: theme('colors.primary.400') },
             },
+            '.header-link': {
+              textDecoration: 'none',
+              color: theme('colors.gray.900'),
+              transition: '0.2s',
+              '&:hover': {
+                color: theme('colors.primary.500'),
+              },
+            },
             'h1,h2': {
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
