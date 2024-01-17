@@ -1,10 +1,12 @@
-import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import { defineConfig } from 'astro/config'
+
 import rehypeKatex from 'rehype-katex'
-import remarkMath from 'remark-math'
 import rehypeShikiji from 'rehype-shikiji'
+import remarkMath from 'remark-math'
+
 import { transformerNotationDiff } from 'shikiji-transformers'
 
 import { SITE_METADATA } from './src/consts.ts'
