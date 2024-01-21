@@ -24,7 +24,7 @@ const blog = defineCollection({
     tags: z.array(reference('tags')).default(['default']),
     lastmod: z.coerce.date().optional(),
     draft: z.boolean().default(false),
-    summary: z.string().optional(),
+    summary: z.string(),
     images: z.string().optional(),
     authors: z.array(reference('authors')).default(['default']),
     // TODO: Add support for tags-and-list layout

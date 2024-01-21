@@ -8,7 +8,8 @@ This site started with the tailwind astro started blog and has diverged in many 
 - [x] Actions for notebooks and obsidian markdown to automatically be pulled into repo
 - [ ] Add content config for obsidian and notebooks separatey?
 - [ ] Add reading time
-- [ ] Add rehype autolink headings
+- [x] Add rehype autolink headings
+  - [x] Styled headings on highlight
 - [x] remark gfm for footnotes
 - [ ] rehype citation for bib with citations
 - [x] change from prism to shikiji
@@ -24,3 +25,4 @@ This site started with the tailwind astro started blog and has diverged in many 
 - [x] Auto link headings that render correctly
 - [x] Table of content generation
 - [ ] TOC Styling
+- [ ] Re-write resume in markdown, and create custom latex template for the markdown to become tex then pdf
