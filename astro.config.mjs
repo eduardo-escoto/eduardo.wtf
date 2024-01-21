@@ -15,9 +15,15 @@ import readingMdxTime from 'remark-reading-time/mdx'
 import remarkSmartypants from 'remark-smartypants'
 import remarkToc from 'remark-toc'
 
+import vitesseLight from 'shikiji/themes/vitesse-light'
 import { transformerNotationDiff } from 'shikiji-transformers'
 
 import { SITE_METADATA } from './src/consts.ts'
+
+let vitesseLightOverride = {
+  ...vitesseLight,
+  bg: 'var(--color-code-light-bg)',
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -40,8 +46,8 @@ export default defineConfig({
         rehypeShikiji,
         {
           themes: {
-            light: 'catppuccin-latte',
-            dark: 'catppuccin-mocha',
+            light: vitesseLightOverride,
+            dark: 'vitesse-dark',
           },
           transformers: [transformerNotationDiff()],
           wrap: true,

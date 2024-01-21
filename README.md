@@ -14,7 +14,6 @@ This site started with the tailwind astro started blog and has diverged in many 
 - [ ] rehype citation for bib with citations
 - [x] change from prism to shikiji
 - [ ] Count only draft = false posts in tag counts
-- [ ] move notebooks to notebooks subdirectory (?)
 - [ ] redierect notebook to the proper file on github
 - [ ] When resume is built, add action to update the latest
 - [ ] add resume link

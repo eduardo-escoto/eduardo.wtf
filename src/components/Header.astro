@@ -4,11 +4,28 @@ import Logo from './Logo.astro'
 import MobileNav from './MobileNav.astro'
 import ThemeSwitcher from './ThemeSwitcher.astro'
 import { NAVIGATION, SITE_METADATA } from '@/consts'
+
+const headerLinkClassList = [
+  'fill-black',
+  'stroke-black',
+  'text-black',
+  'hover:fill-primary-600',
+  'hover:stroke-primary-600',
+  'hover:text-primary-600',
+  'hover:duration-200',
+  'dark:fill-white',
+  'dark:stroke-white',
+  'dark:text-white',
+  'dark:hover:fill-primary-400',
+  'dark:hover:stroke-primary-400',
+  'dark:hover:text-primary-400',
+  'dark:hover:duration-200',
+]
 ---
 
 <header class="flex items-center justify-between py-10">
   <div>
-    <a href="/" aria-label={SITE_METADATA.headerTitle}>
+    <a href="/" aria-label={SITE_METADATA.headerTitle} class:list={headerLinkClassList}>
       <div class="flex items-center justify-between">
         <div class="mr-3">
           <Logo />
@@ -30,7 +47,7 @@ import { NAVIGATION, SITE_METADATA } from '@/consts'
       NAVIGATION.filter((link) => link.href !== '/').map((link) => (
         <HeaderLink
           href={link.href}
-          class="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
+          class="hidden font-medium text-gray-900 hover:text-primary-600 hover:duration-200  dark:text-gray-100 dark:hover:text-primary-400 sm:block"
         >
           {link.title}
         </HeaderLink>

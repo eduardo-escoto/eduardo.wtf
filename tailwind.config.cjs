@@ -17,13 +17,12 @@ module.exports = {
         sans: ['Space Grotesk', ...fontFamily.sans],
       },
       colors: {
-        primary: colors.pink,
-        gray: colors.gray,
-        white: '#ffffff',
-        pre_grey_text: '#4C4F69',
-        pre_grey_dark_text: '#CDD6F4',
-        pre_bg_grey: '#eff1f5',
-        pre_bg_dark_grey: '#1e1e2e',
+        primary: colors.emerald,
+        gray: colors.stone,
+        'code-light-bg': colors.stone[100], // vitesse-light bg not dark enough
+        'code-light-fg': '#393A34', //vitesse light
+        'code-dark-bg': '#121212', // vitesse dark
+        'code-dark-fg': '#DBD7CAEE', //vitesse dark
       },
       typography: ({ theme }) => ({
         DEFAULT: {
@@ -40,7 +39,7 @@ module.exports = {
               color: theme('colors.gray.900'),
               transition: '0.2s',
               '&:hover': {
-                color: theme('colors.primary.500'),
+                color: theme('colors.primary.600'),
               },
             },
             'h1,h2': {
@@ -51,11 +50,12 @@ module.exports = {
               fontWeight: '600',
             },
             code: {
-              color: theme('colors.indigo.500'),
+              color: theme('colors.code-light-bg'),
+              backgroundColor: theme('colors.code-light-bg'),
             },
             pre: {
-              color: theme('colors.pre_grey_text'),
-              backgroundColor: theme('colors.pre_bg_grey'),
+              color: theme('colors.code-light-fg'),
+              backgroundColor: theme('colors.code-light-bg'),
             },
           },
         },
@@ -82,14 +82,39 @@ module.exports = {
             img: {
               backgroundColor: theme('colors.white'),
             },
+            code: {
+              color: theme('colors.code-dark-fg'),
+              backgroundColor: theme('colors.code-dark-bg'),
+            },
             pre: {
-              color: theme('colors.pre_grey_dark_text'),
-              backgroundColor: theme('colors.pre_bg_dark_grey'),
+              color: theme('colors.code-dark-fg'),
+              backgroundColor: theme('colors.code-dark-bg'),
             },
           },
         },
       }),
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    function ({ addBase, theme }) {
+      function extractColorVars(colorObj, colorGroup = '') {
+        return Object.keys(colorObj).reduce((vars, colorKey) => {
+          const value = colorObj[colorKey]
+
+          const newVars =
+            typeof value === 'string'
+              ? { [`--color${colorGroup}-${colorKey}`]: value }
+              : extractColorVars(value, `-${colorKey}`)
+
+          return { ...vars, ...newVars }
+        }, {})
+      }
+
+      addBase({
+        ':root': extractColorVars(theme('colors')),
+      })
+    },
+  ],
 }

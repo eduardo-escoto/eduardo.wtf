@@ -18,9 +18,9 @@
   @apply my-5;
 }
 
-.invert-svg {
-  filter: invert(100%) !important;
-}
+/* .invert-svg {
+  filter: invert(95%) !important;
+} */
 
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
