@@ -1,14 +1,90 @@
 <script>
-  function initAnimation() {
-    const canvas = document.getElementById('ed-animation') as HTMLCanvasElement
-    const context = canvas.getContext('2d')
+  import {
+    $animationState,
+    $animationInterval,
+    type CircleLocation,
+    type RectangleLocation,
+  } from '@/store'
 
-    context!.fillRect(0, 0, canvas.width, canvas.height)
+  interface ContextReturn {
+    canvas: HTMLCanvasElement
+    context: CanvasRenderingContext2D
   }
-  initAnimation()
-  //   document.addEventListener('astro:after-swap', () => initAnimation())
+
+  function handleResize() {
+    const canvasContainer = document.getElementById('animation-container') as HTMLDivElement
+    const canvas = document.getElementById('animation-canvas') as HTMLCanvasElement
+
+    canvas.width = canvasContainer.offsetWidth
+    canvas.height = canvasContainer.offsetHeight
+
+    renderCurrentState()
+  }
+
+  function createCircle(context: CanvasRenderingContext2D, x: number, y: number, r: number) {
+    context.beginPath()
+    context.arc(x, y, r, 0, 2 * Math.PI)
+    context.strokeStyle = 'hsl(158, 10%, 52%)'
+    context.fillStyle = 'hsl(158, 10%, 52%)'
+    context.stroke()
+    context.fill()
+    context.closePath()
+  }
+
+  function getContext(): ContextReturn {
+    const canvas = document.getElementById('animation-canvas') as HTMLCanvasElement
+    const context = canvas.getContext('2d') || new CanvasRenderingContext2D()
+    return { canvas, context }
+  }
+
+  function clearPastState() {
+    const { canvas, context } = getContext()
+    context.clearRect(0, 0, canvas.width, canvas.height)
+  }
+
+  function renderCurrentState() {
+    const { canvas, context } = getContext()
+    const elements = $animationState.get()
+    // console.log(elements)
+    elements.forEach((el: RectangleLocation | CircleLocation) => {
+      //   if (typeof el instanceof CircleLocation) {
+      //     createCircle(context, el.x, el.y, el.r)
+      console.log(el)
+      //   }
+    })
+    // createCircle(context, rl.x, rl.y, 2)
+    // $rectangleLocation.set({ x: rl.x - 0.25, y: rl.y - 0.25 })
+  }
+
+  function animate() {
+    clearPastState()
+    renderCurrentState()
+  }
+
+  function initAnimation() {
+    const intervalSpeed = 10000
+    const n_circles = 10
+    let circle_data: Array<CircleLocation> = []
+
+    for (let i = 0; i <= n_circles; i++) {
+      circle_data = [...circle_data, { x: i * 5, y: i, r: 8 } as CircleLocation]
+    }
+
+    $animationState.set(circle_data)
+
+    handleResize()
+
+    if (!$animationInterval.get()) {
+      $animationInterval.set(setInterval(() => animate(), intervalSpeed))
+    }
+
+    animate()
+  }
+
+  document.addEventListener('astro:page-load', initAnimation)
+  window.addEventListener('resize', handleResize)
 </script>
 
-<div class="absolute top-0 -z-10 h-full w-full">
-  <canvas class="h-full w-full" id="ed-animation"></canvas>
+<div class="absolute top-0 -z-10 h-full w-full" id="animation-container">
+  <canvas width="0" height="0" id="animation-canvas"></canvas>
 </div>
