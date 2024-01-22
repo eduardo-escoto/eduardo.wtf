@@ -15,15 +15,42 @@ import readingMdxTime from 'remark-reading-time/mdx'
 import remarkSmartypants from 'remark-smartypants'
 import remarkToc from 'remark-toc'
 
+import vitesseDark from 'shikiji/themes/vitesse-dark'
 import vitesseLight from 'shikiji/themes/vitesse-light'
-import { transformerNotationDiff } from 'shikiji-transformers'
+
+import {
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationDiff,
+  transformerNotationErrorLevel,
+  transformerNotationFocus,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from 'shikiji-transformers'
 
 import { SITE_METADATA } from './src/consts.ts'
 
-let vitesseLightOverride = {
+const vitesseLightOverride = {
   ...vitesseLight,
   bg: 'var(--color-code-light-bg)',
+  fg: 'var(--color-code-light-fg)',
 }
+
+const vitesseDarkOverride = {
+  ...vitesseDark,
+  bg: 'var(--color-code-dark-bg)',
+  fg: 'var(--color-code-dark-fg)',
+}
+
+const shikiji_transformers = [
+  transformerMetaHighlight,
+  transformerMetaWordHighlight,
+  transformerNotationDiff,
+  transformerNotationErrorLevel,
+  transformerNotationFocus,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+]
 
 // https://astro.build/config
 export default defineConfig({
@@ -47,9 +74,9 @@ export default defineConfig({
         {
           themes: {
             light: vitesseLightOverride,
-            dark: 'vitesse-dark',
+            dark: vitesseDarkOverride,
           },
-          transformers: [transformerNotationDiff()],
+          transformers: shikiji_transformers,
           wrap: true,
         },
       ],

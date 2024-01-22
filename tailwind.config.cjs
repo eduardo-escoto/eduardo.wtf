@@ -101,12 +101,15 @@ module.exports = {
     function ({ addBase, theme }) {
       function extractColorVars(colorObj, colorGroup = '') {
         return Object.keys(colorObj).reduce((vars, colorKey) => {
+          let newVars = {}
           const value = colorObj[colorKey]
-
-          const newVars =
-            typeof value === 'string'
-              ? { [`--color${colorGroup}-${colorKey}`]: value }
-              : extractColorVars(value, `-${colorKey}`)
+          const save_vars = ['code-light-bg', 'code-light-fg', 'code-dark-bg', 'code-dark-fg']
+          if (save_vars.includes(colorKey)) {
+            newVars =
+              typeof value === 'string'
+                ? { [`--color${colorGroup}-${colorKey}`]: value }
+                : extractColorVars(value, `-${colorKey}`)
+          }
 
           return { ...vars, ...newVars }
         }, {})
