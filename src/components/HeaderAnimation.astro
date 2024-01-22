@@ -1,0 +1,14 @@
+<script>
+  function initAnimation() {
+    const canvas = document.getElementById('ed-animation') as HTMLCanvasElement
+    const context = canvas.getContext('2d')
+
+    context!.fillRect(0, 0, canvas.width, canvas.height)
+  }
+  initAnimation()
+  //   document.addEventListener('astro:after-swap', () => initAnimation())
+</script>
+
+<div class="absolute top-0 -z-10 h-full w-full">
+  <canvas class="h-full w-full" id="ed-animation"></canvas>
+</div>

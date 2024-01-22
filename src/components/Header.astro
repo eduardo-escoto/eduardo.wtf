@@ -1,8 +1,10 @@
 ---
+import HeaderAnimation from './HeaderAnimation.astro'
 import HeaderLink from './HeaderLink.astro'
 import Logo from './Logo.astro'
 import MobileNav from './MobileNav.astro'
 import ThemeSwitcher from './ThemeSwitcher.astro'
+import SectionContainer from '@/components/SectionContainer.astro'
 import { NAVIGATION, SITE_METADATA } from '@/consts'
 
 const headerLinkClassList = [
@@ -23,40 +25,45 @@ const headerLinkClassList = [
 ]
 ---
 
-<header class="flex items-center justify-between py-10">
-  <div>
-    <a href="/" aria-label={SITE_METADATA.headerTitle} class:list={headerLinkClassList}>
-      <div class="flex items-center justify-between">
-        <div class="mr-2">
-          <Logo />
-        </div>
-        {
-          typeof SITE_METADATA.headerTitle === 'string' ? (
-            <div class="flex h-6 items-center space-x-4 text-2xl font-semibold leading-5 sm:block sm:space-x-6">
-              {SITE_METADATA.headerTitle}
+<header class="relative">
+  <SectionContainer>
+    <div class="flex items-center justify-between pb-5 pt-10">
+      <div class="">
+        <a href="/" aria-label={SITE_METADATA.headerTitle} class:list={headerLinkClassList}>
+          <div class="flex items-center justify-between">
+            <div class="mr-2">
+              <Logo />
             </div>
-          ) : (
-            SITE_METADATA.headerTitle
-          )
-        }
+            {
+              typeof SITE_METADATA.headerTitle === 'string' ? (
+                <div class="flex h-6 items-center space-x-4 text-2xl font-semibold leading-5 sm:block sm:space-x-6">
+                  {SITE_METADATA.headerTitle}
+                </div>
+              ) : (
+                SITE_METADATA.headerTitle
+              )
+            }
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-  <div class="flex items-center space-x-4 leading-5 sm:space-x-6">
-    {
-      NAVIGATION.filter((link) => link.href !== '/').map((link) => (
-        <HeaderLink
-          href={link.href}
-          class="hidden font-medium text-gray-900 hover:text-primary-600 hover:duration-200  dark:text-gray-100 dark:hover:text-primary-400 sm:block"
-        >
-          {link.title}
-        </HeaderLink>
-      ))
-    }
+      <div class="flex items-center space-x-4 leading-5 sm:space-x-6">
+        {
+          NAVIGATION.filter((link) => link.href !== '/').map((link) => (
+            <HeaderLink
+              href={link.href}
+              class="hidden font-medium text-gray-900 hover:text-primary-600 hover:duration-200  dark:text-gray-100 dark:hover:text-primary-400 sm:block"
+            >
+              {link.title}
+            </HeaderLink>
+          ))
+        }
 
-    <!--TODO: add theme button-->
-    <!--<SearchButton />-->
-    <ThemeSwitcher />
-    <MobileNav />
-  </div>
+        <!--TODO: add theme button-->
+        <!--<SearchButton />-->
+        <ThemeSwitcher />
+        <MobileNav />
+      </div>
+    </div>
+  </SectionContainer>
+  <!-- <HeaderAnimation client:load /> -->
 </header>

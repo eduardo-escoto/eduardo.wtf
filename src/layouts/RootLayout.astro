@@ -21,14 +21,14 @@ const { title, description } = Astro.props
   <body class="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
     <!--TODO: Add Google Analytics-->
     <!--<Analytics analyticsConfig={SITE_METADATA.analytics as AnalyticsConfig} />-->
-    <SectionContainer>
-      <div class="flex h-screen flex-col justify-between font-sans">
-        <Header />
-        <main class="mb-auto">
+    <div class="flex h-screen flex-col justify-between font-sans">
+      <Header />
+      <main class="mb-auto">
+        <SectionContainer>
           <slot />
-        </main>
-        <Footer />
-      </div>
-    </SectionContainer>
+        </SectionContainer>
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
