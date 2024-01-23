@@ -22,13 +22,13 @@ const { title, description } = Astro.props
     <!--TODO: Add Google Analytics-->
     <!--<Analytics analyticsConfig={SITE_METADATA.analytics as AnalyticsConfig} />-->
     <div class="flex h-screen flex-col justify-between font-sans">
-      <Header />
+      <Header transition:persist />
       <main class="mb-auto">
         <SectionContainer>
           <slot />
         </SectionContainer>
       </main>
-      <Footer />
+      <Footer transition:persist />
     </div>
   </body>
 </html>

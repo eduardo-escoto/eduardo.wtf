@@ -1,10 +1,19 @@
 <script>
-  import {
-    $animationState,
-    $animationInterval,
-    type CircleLocation,
-    type RectangleLocation,
-  } from '@/store'
+  import { $pointState, $animationInterval } from '@/store'
+
+  import { type AnimationPoint2D } from '@/animation/types'
+  // import { Vector2D } from '@/animation/vectors'
+  import { Point2D } from '@/animation/points'
+
+  // import random from '@stdlib/random/base'
+  // import { contentObservable } from 'node_modules/astro/dist/content/utils'
+
+  const ANIMATION_CONSTANTS = {
+    REFRESH_RATE: 1, // in hz
+    N_POINTS: 10,
+  }
+
+  // const normal = random.boxMuller.factory()
 
   interface ContextReturn {
     canvas: HTMLCanvasElement
@@ -21,11 +30,23 @@
     renderCurrentState()
   }
 
-  function createCircle(context: CanvasRenderingContext2D, x: number, y: number, r: number) {
+  function createPoint(
+    canvas: HTMLCanvasElement,
+    context: CanvasRenderingContext2D,
+    point: AnimationPoint2D
+  ) {
     context.beginPath()
-    context.arc(x, y, r, 0, 2 * Math.PI)
-    context.strokeStyle = 'hsl(158, 10%, 52%)'
-    context.fillStyle = 'hsl(158, 10%, 52%)'
+    context.arc(
+      canvas.width * point.position.x,
+      canvas.height * point.position.y,
+      point.radius_len,
+      0,
+      2 * Math.PI
+    )
+
+    context.strokeStyle = point.color.toHSLDefinitionString()
+    context.fillStyle = point.color.toHSLDefinitionString()
+
     context.stroke()
     context.fill()
     context.closePath()
@@ -37,52 +58,94 @@
     return { canvas, context }
   }
 
-  function clearPastState() {
+  function clearContext() {
     const { canvas, context } = getContext()
-    context.clearRect(0, 0, canvas.width, canvas.height)
+    context.reset()
   }
 
   function renderCurrentState() {
     const { canvas, context } = getContext()
-    const elements = $animationState.get()
-    // console.log(elements)
-    elements.forEach((el: RectangleLocation | CircleLocation) => {
-      //   if (typeof el instanceof CircleLocation) {
-      //     createCircle(context, el.x, el.y, el.r)
-      console.log(el)
-      //   }
+    const points = $pointState.get()
+    points.forEach((point: AnimationPoint2D) => {
+      createPoint(canvas, context, point)
     })
-    // createCircle(context, rl.x, rl.y, 2)
-    // $rectangleLocation.set({ x: rl.x - 0.25, y: rl.y - 0.25 })
+  }
+
+  function getNextState(): Array<AnimationPoint2D> {
+    const points = $pointState.get()
+    const newPoints = points.map((point: AnimationPoint2D) => {
+      // const current_direction = Math.atan(el.x_pos / el.y_pos)
+      // const next_direction = current_direction * (1 + 0.1 * normal())
+      // const x_pos = el.x_pos + Math.sin(next_direction) * 0.001
+      // const y_pos = el.y_pos + Math.cos(next_direction) * 0.001
+      // const r_len = el.r_len + Math.random() * 2 - 1
+
+      const nextPosition = point.position.add(point.velocity_vec)
+
+      // if (nextPosition.x > 1 || nextPosition.x < 0) {
+      //   nextPosition. = 1 - (nextPosition.)
+      // }
+
+      return new Point2D(point.radius_len, nextPosition, point.velocity_vec, point.color)
+    })
+    return newPoints
+  }
+
+  function updateState(state: Array<AnimationPoint2D>) {
+    $pointState.set(state)
   }
 
   function animate() {
-    clearPastState()
+    clearContext()
     renderCurrentState()
+
+    const state = getNextState()
+    updateState(state)
   }
 
   function initAnimation() {
-    const intervalSpeed = 10000
-    const n_circles = 10
-    let circle_data: Array<CircleLocation> = []
+    const intervalSpeed = (1 / ANIMATION_CONSTANTS.REFRESH_RATE) * 1000 // converting refresh rate to ms
+    let points: Array<AnimationPoint2D> = []
 
-    for (let i = 0; i <= n_circles; i++) {
-      circle_data = [...circle_data, { x: i * 5, y: i, r: 8 } as CircleLocation]
+    for (let i = 0; i <= ANIMATION_CONSTANTS.N_POINTS; i++) {
+      points = [...points, Point2D.RandomPointFactory()]
     }
-
-    $animationState.set(circle_data)
+    console.log(points)
+    $pointState.set(points)
 
     handleResize()
-
-    if (!$animationInterval.get()) {
-      $animationInterval.set(setInterval(() => animate(), intervalSpeed))
-    }
-
     animate()
+
+    $animationInterval.set(setInterval(() => animate(), intervalSpeed))
   }
 
-  document.addEventListener('astro:page-load', initAnimation)
+  function pauseAnimation() {
+    clearInterval($animationInterval.get())
+  }
+
+  function unPauseAnimation() {
+    const intervalSpeed = (1 / ANIMATION_CONSTANTS.REFRESH_RATE) * 1000 // converting refresh rate to ms
+
+    handleResize()
+    $animationInterval.set(
+      setInterval(() => {
+        animate()
+      }, intervalSpeed)
+    )
+  }
+
+  document.addEventListener('astro:page-load', initAnimation, { once: true })
+  document.addEventListener('astro:before-swap', pauseAnimation)
+  document.addEventListener('astro:after-swap', unPauseAnimation)
+
   window.addEventListener('resize', handleResize)
+
+  // TODO:
+  // - collision detection against wall
+  // - collision detection against other points
+  // - reflection off of wall
+  // - bounce off of other points
+  // - utility functions for vector calculation
 </script>
 
 <div class="absolute top-0 -z-10 h-full w-full" id="animation-container">

@@ -18,6 +18,7 @@
     "@astrojs/rss": "^4.0.2",
     "@astrojs/sitemap": "^3.0.4",
     "@astrojs/tailwind": "^5.1.0",
+    "@stdlib/random": "^0.1.1",
     "astro": "^4.1.2",
     "nanostores": "^0.9.5"
   },
