@@ -28,9 +28,9 @@ export class Point2D implements AnimationPoint2D {
   }
   static RandomPointFactory(): AnimationPoint2D {
     return new Point2D(
-      2 as number,
+      10 as number,
       new Position2D(Math.random(), Math.random()),
-      new Vector2D(Math.random() * 0.1, Math.random()),
+      new Vector2D(0.001, Math.random() * 2 * Math.PI),
       new HSLPosition(Math.random(), Math.random(), Math.random())
     )
   }

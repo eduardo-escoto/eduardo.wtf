@@ -2,6 +2,7 @@
   import { $pointState, $animationInterval } from '@/store'
 
   import { type AnimationPoint2D } from '@/animation/types'
+  import { Vector2D } from '@/animation/vectors'
   // import { Vector2D } from '@/animation/vectors'
   import { Point2D } from '@/animation/points'
 
@@ -9,8 +10,8 @@
   // import { contentObservable } from 'node_modules/astro/dist/content/utils'
 
   const ANIMATION_CONSTANTS = {
-    REFRESH_RATE: 1, // in hz
-    N_POINTS: 10,
+    REFRESH_RATE: 120, // in hz
+    N_POINTS: 20,
   }
 
   // const normal = random.boxMuller.factory()
@@ -72,21 +73,37 @@
   }
 
   function getNextState(): Array<AnimationPoint2D> {
+    const { canvas } = getContext()
     const points = $pointState.get()
     const newPoints = points.map((point: AnimationPoint2D) => {
-      // const current_direction = Math.atan(el.x_pos / el.y_pos)
-      // const next_direction = current_direction * (1 + 0.1 * normal())
-      // const x_pos = el.x_pos + Math.sin(next_direction) * 0.001
-      // const y_pos = el.y_pos + Math.cos(next_direction) * 0.001
-      // const r_len = el.r_len + Math.random() * 2 - 1
-
+      const x_buff_offset = point.radius_len / canvas.width
+      const y_buff_offset = point.radius_len / canvas.height
+      const edgeBuffer = {
+        left: x_buff_offset,
+        right: 1 - x_buff_offset,
+        top: y_buff_offset,
+        bottom: 1 - y_buff_offset,
+      }
+      const nextVelocity = new Vector2D(point.velocity_vec.magnitude, point.velocity_vec.angle)
       const nextPosition = point.position.add(point.velocity_vec)
 
-      // if (nextPosition.x > 1 || nextPosition.x < 0) {
-      //   nextPosition. = 1 - (nextPosition.)
-      // }
+      if (nextPosition.x > edgeBuffer.right || nextPosition.x < edgeBuffer.left) {
+        nextVelocity.angle = Math.PI - nextVelocity.angle
+        if (nextPosition.x > edgeBuffer.right)
+          nextPosition.x = 2 * edgeBuffer.right - nextPosition.x
+        if (nextPosition.x < edgeBuffer.left)
+          nextPosition.x = 2 * edgeBuffer.left - Math.abs(nextPosition.x)
+      }
 
-      return new Point2D(point.radius_len, nextPosition, point.velocity_vec, point.color)
+      if (nextPosition.y > edgeBuffer.bottom || nextPosition.y < edgeBuffer.top) {
+        nextVelocity.angle = -nextVelocity.angle
+        if (nextPosition.y > edgeBuffer.bottom)
+          nextPosition.y = 2 * edgeBuffer.bottom - nextPosition.y
+        if (nextPosition.y < edgeBuffer.top)
+          nextPosition.y = 2 * edgeBuffer.top - Math.abs(nextPosition.y)
+      }
+
+      return new Point2D(point.radius_len, nextPosition, nextVelocity, point.color)
     })
     return newPoints
   }
