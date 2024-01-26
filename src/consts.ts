@@ -10,7 +10,7 @@ export const SITE_METADATA = {
   language: 'en-us',
   theme: 'system', // Options: system, light, dark, Does not work yet
   siteUrl: 'https://eduardo.wtf/',
-  siteRepo: 'https://github.com/eduardo-escoto/eduardo-wtf-astro-final',
+  siteRepo: 'https://github.com/eduardo-escoto/eduardo.wtf',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   locale: 'en-US',
