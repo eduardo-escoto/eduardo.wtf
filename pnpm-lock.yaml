@@ -82,18 +82,27 @@ devDependencies:
   rehype-slug:
     specifier: ^6.0.0
     version: 6.0.0
+  remark-frontmatter:
+    specifier: ^5.0.0
+    version: 5.0.0
   remark-gfm:
     specifier: ^4.0.0
     version: 4.0.0
   remark-math:
     specifier: ^6.0.0
     version: 6.0.0
+  remark-parse:
+    specifier: ^11.0.0
+    version: 11.0.0
   remark-reading-time:
     specifier: ^2.0.1
     version: 2.0.1
   remark-smartypants:
     specifier: ^2.1.0
     version: 2.1.0
+  remark-stringify:
+    specifier: ^11.0.0
+    version: 11.0.0
   remark-toc:
     specifier: ^9.0.0
     version: 9.0.0
@@ -109,6 +118,18 @@ devDependencies:
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
+  to-vfile:
+    specifier: ^8.0.0
+    version: 8.0.0
+  unified:
+    specifier: ^11.0.4
+    version: 11.0.4
+  vfile:
+    specifier: ^6.0.1
+    version: 6.0.1
+  vfile-matter:
+    specifier: ^5.0.0
+    version: 5.0.0
 
 packages:
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -3643,6 +3664,15 @@ packages:
     dependencies:
       reusify: 1.0.4
 
+  /fault@2.0.1:
+    resolution:
+      {
+        integrity: sha512-WtySTkS4OKev5JtpHXnib4Gxiurzh5NCGvWrFaZ34m6JehfTUhKZvn9njTfw48t6JumVQOmrKqpmGcdwxnhqBQ==,
+      }
+    dependencies:
+      format: 0.2.2
+    dev: true
+
   /file-entry-cache@6.0.1:
     resolution:
       {
@@ -3727,6 +3757,14 @@ packages:
       }
     dependencies:
       is-callable: 1.2.7
+    dev: true
+
+  /format@0.2.2:
+    resolution:
+      {
+        integrity: sha512-wzsgA6WOq+09wrU1tsJ09udeR/YZRaeArL9e1wPbFg3GG2yDnC2ldKpxs4xunpFF9DgqCqOIra3bc1HWrJ37Ww==,
+      }
+    engines: { node: '>=0.4.x' }
     dev: true
 
   /fraction.js@4.3.7:
@@ -5092,6 +5130,22 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  /mdast-util-frontmatter@2.0.1:
+    resolution:
+      {
+        integrity: sha512-LRqI9+wdgC25P0URIJY9vwocIzCcksduHQ9OF2joxQoyTNVduwLAFUzjoopuRJbJAReaKrNQKAZKL3uCMugWJA==,
+      }
+    dependencies:
+      '@types/mdast': 4.0.3
+      devlop: 1.1.0
+      escape-string-regexp: 5.0.0
+      mdast-util-from-markdown: 2.0.0
+      mdast-util-to-markdown: 2.1.0
+      micromark-extension-frontmatter: 2.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /mdast-util-gfm-autolink-literal@2.0.0:
     resolution:
       {
@@ -5358,6 +5412,18 @@ packages:
       micromark-util-subtokenize: 2.0.0
       micromark-util-symbol: 2.0.0
       micromark-util-types: 2.0.0
+
+  /micromark-extension-frontmatter@2.0.0:
+    resolution:
+      {
+        integrity: sha512-C4AkuM3dA58cgZha7zVnuVxBhDsbttIMiytjgsM2XbHAB2faRVaHRle40558FBN+DJcrLNCoqG5mlrpdU4cRtg==,
+      }
+    dependencies:
+      fault: 2.0.1
+      micromark-util-character: 2.0.1
+      micromark-util-symbol: 2.0.0
+      micromark-util-types: 2.0.0
+    dev: true
 
   /micromark-extension-gfm-autolink-literal@2.0.0:
     resolution:
@@ -6807,6 +6873,20 @@ packages:
       unified: 11.0.4
     dev: false
 
+  /remark-frontmatter@5.0.0:
+    resolution:
+      {
+        integrity: sha512-XTFYvNASMe5iPN0719nPrdItC9aU0ssC4v14mH1BCi1u0n1gAocqcujWUrByftZTbLhRtiKRyjYTSIOcr69UVQ==,
+      }
+    dependencies:
+      '@types/mdast': 4.0.3
+      mdast-util-frontmatter: 2.0.1
+      micromark-extension-frontmatter: 2.0.0
+      unified: 11.0.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /remark-gfm@4.0.0:
     resolution:
       {
@@ -7823,6 +7903,15 @@ packages:
     dependencies:
       is-number: 7.0.0
 
+  /to-vfile@8.0.0:
+    resolution:
+      {
+        integrity: sha512-IcmH1xB5576MJc9qcfEC/m/nQCFt3fzMHz45sSlgJyTWjRbKW1HAkJpuf3DgE57YzIlZcwcBZA5ENQbBo4aLkg==,
+      }
+    dependencies:
+      vfile: 6.0.1
+    dev: true
+
   /trim-lines@3.0.1:
     resolution:
       {
@@ -8226,6 +8315,16 @@ packages:
     dependencies:
       '@types/unist': 3.0.2
       vfile: 6.0.1
+
+  /vfile-matter@5.0.0:
+    resolution:
+      {
+        integrity: sha512-jhPSqlj8hTSkTXOqyxbUeZAFFVq/iwu/jukcApEqc/7DOidaAth6rDc0Zgg0vWpzUnWkwFP7aK28l6nBmxMqdQ==,
+      }
+    dependencies:
+      vfile: 6.0.1
+      yaml: 2.3.4
+    dev: true
 
   /vfile-message@3.1.4:
     resolution:

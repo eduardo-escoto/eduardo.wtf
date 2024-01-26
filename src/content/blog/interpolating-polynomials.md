@@ -4,6 +4,8 @@ draft: false
 summary: Numerical Analysis code and proofs of numerous polynomial interpolation techniques.
 tags:
   - math
+  - notebooks
+  - code
 title: An exploration of Polynomial Interpolation
 ---
 

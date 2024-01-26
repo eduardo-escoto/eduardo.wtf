@@ -4,6 +4,7 @@ summary: A brief explanation on how to easily get Jupyter Notebooks to render in
   Sites.
 tags:
   - markdown
+  - astro
 title: Rendering Jupyter Notebooks in a Statically Generated Site
 ---
 
