@@ -3,7 +3,7 @@ date: 2024-01-26
 summary: A brief explanation on how to easily get Jupyter Notebooks to render in Static
   Sites.
 tags:
-- Markdown
+- markdown
 title: Rendering Jupyter Notebooks in a Statically Generated Site
 ---
 
