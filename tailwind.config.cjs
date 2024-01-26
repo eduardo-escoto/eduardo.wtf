@@ -49,13 +49,20 @@ module.exports = {
             h3: {
               fontWeight: '600',
             },
-            code: {
-              color: theme('colors.code-light-bg'),
-              backgroundColor: theme('colors.code-light-bg'),
-            },
-            pre: {
+            'p > code': {
               color: theme('colors.code-light-fg'),
               backgroundColor: theme('colors.code-light-bg'),
+              paddingLeft: '8px',
+              paddingRight: '8px',
+              paddingTop: '3px',
+              paddingBottom: '3px',
+              borderRadius: '6px',
+            },
+            'code::before': {
+              content: '',
+            },
+            'code::after': {
+              content: '',
             },
           },
         },
@@ -82,13 +89,20 @@ module.exports = {
             img: {
               backgroundColor: theme('colors.white'),
             },
-            code: {
+            'p > code': {
               color: theme('colors.code-dark-fg'),
               backgroundColor: theme('colors.code-dark-bg'),
+              paddingLeft: '8px',
+              paddingRight: '8px',
+              paddingTop: '3px',
+              paddingBottom: '3px',
+              borderRadius: '6px',
             },
-            pre: {
-              color: theme('colors.code-dark-fg'),
-              backgroundColor: theme('colors.code-dark-bg'),
+            'p > code::before': {
+              content: '',
+            },
+            'p > code::after': {
+              content: '',
             },
           },
         },
