@@ -7,6 +7,9 @@ const author = await getEntry('authors', 'default')
 const { Content } = await author.render()
 ---
 
+<!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+<![endif]-->
 <RootLayout title={Content.name} description="about">
   <AuthorLayout content={author}>
     <Content />

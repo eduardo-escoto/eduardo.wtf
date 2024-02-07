@@ -1,15 +1,16 @@
 ---
 import { Image } from 'astro:assets'
 import { type CollectionEntry, getEntries } from 'astro:content'
-import RootLayout from './RootLayout.astro'
-import FormattedDate from '../components/FormattedDate.astro'
-import Link from '../components/Link.astro'
-import PageTitle from '../components/PageTitle.astro'
-import ScrollTopAndComments from '../components/ScrollTopAndComments.astro'
-import SectionContainer from '../components/SectionContainer.astro'
-import Tag from '../components/Tag.astro'
 
-interface Props {
+import FormattedDate from '@/components/FormattedDate.astro'
+import Link from '@/components/Link.astro'
+import PageTitle from '@/components/PageTitle.astro'
+import ScrollTopAndComments from '@/components/ScrollTopAndComments.astro'
+import SectionContainer from '@/components/SectionContainer.astro'
+import Tag from '@/components/Tag.astro'
+import RootLayout from '@/layouts/RootLayout.astro'
+
+type Props = {
   post: CollectionEntry<'blog'>
   next?: CollectionEntry<'blog'>
   prev?: CollectionEntry<'blog'>

@@ -26,3 +26,4 @@ This site started with the tailwind astro started blog and has diverged in many 
 - [x] Table of content generation
 - [ ] TOC Styling
 - [ ] Re-write resume in markdown, and create custom latex template for the markdown to become tex then pdf
+- [ ] Insert resume content into about page (can be adhoc for now)
