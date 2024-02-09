@@ -22,6 +22,7 @@ export const SITE_METADATA = {
     email: 'me@eduardo.wtf',
     github: 'https://github.com/eduardo-escoto',
     linkedin: 'https://www.linkedin.com/in/eduardo-escoto',
+    resume: '/static/files/resume.pdf',
   },
 
   // These are not supported yet
