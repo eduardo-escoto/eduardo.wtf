@@ -49,6 +49,10 @@ module.exports = {
             h3: {
               fontWeight: '600',
             },
+            pre: {
+              color: theme('colors.code-light-fg'),
+              backgroundColor: theme('colors.code-light-bg'),
+            },
             'p > code': {
               color: theme('colors.code-light-fg'),
               backgroundColor: theme('colors.code-light-bg'),
@@ -88,6 +92,10 @@ module.exports = {
             },
             img: {
               backgroundColor: theme('colors.white'),
+            },
+            pre: {
+              color: theme('colors.code-dark-fg'),
+              backgroundColor: theme('colors.code-dark-bg'),
             },
             'p > code': {
               color: theme('colors.code-dark-fg'),
